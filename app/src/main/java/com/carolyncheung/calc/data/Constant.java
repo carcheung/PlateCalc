@@ -10,4 +10,5 @@ public class Constant {
     public static final String UNIT_COLUMN = "Unit";
     public static final String MULTIPLY_COLUMN = "Times";
     public static final String AMOUNT_COLUMN = "Amount";
+    public static final String ID_COLUMN = "id";
 }

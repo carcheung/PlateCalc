@@ -1,10 +1,5 @@
 package com.carolyncheung.calc.activities;
 
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
-import android.content.Intent;
-import android.media.Image;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -19,11 +14,9 @@ import android.widget.Toast;
 import com.carolyncheung.calc.R;
 import com.carolyncheung.calc.data.DBHandler;
 import com.carolyncheung.calc.data.PlateData;
-import com.carolyncheung.calc.fragments.DisplayPlateSetFragment;
 import com.carolyncheung.calc.helpers.CalculationsHelper;
 
-import org.w3c.dom.Text;
-
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class WeightCalculateActivity extends AppCompatActivity {
@@ -42,8 +35,8 @@ public class WeightCalculateActivity extends AppCompatActivity {
 
         DBHandler db = new DBHandler(this);
         ArrayList<PlateData> p = new ArrayList<PlateData>();
-        p = db.getPlateSet(1);
-        int a = p.get(0).getAmount();
+    //    p = db.getPlateSet(1);
+    //    int a = p.get(0).getAmount();
 
         frame.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,10 +50,12 @@ public class WeightCalculateActivity extends AppCompatActivity {
                     double weight = Integer.parseInt(temp);
                     DBHandler db = new DBHandler(getBaseContext());
                     ArrayList<PlateData> p = new ArrayList<PlateData>();
-                    //p = db.getPlateSet(1);
-                    //int a = p.get(0).getAmount();
 
+                    // unit id: 1 = kg, 2 = lbs
+                    p = db.getPlateSet(2);
+            //        int a = p.get(0).getAmount();
 
+/*
                     PlateData p1 = new PlateData(1, "red", 1, 10, 90, 1);
                     PlateData p2 = new PlateData(1, "blue", 2, 10, 70, 1);
                     PlateData p3 = new PlateData(1, "green", 3, 10, 50, 1);
@@ -72,7 +67,7 @@ public class WeightCalculateActivity extends AppCompatActivity {
                     p.add(p3);
                     p.add(p4);
                     p.add(p5);
-                    p.add(p6);
+                    p.add(p6); */
 
                     weight = helper.roundWeights(weight);
                     clearPlates();
@@ -193,7 +188,8 @@ public class WeightCalculateActivity extends AppCompatActivity {
                     pText.setTextColor(getResources().getColor(R.color.white));
                     pText.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
 
-                    pText.setText(String.valueOf((int)plates.get(i).getWeight() / 2));              // TODO: Remove divide by 2 after updating database AND remember to multiply weights * 2, additionally remove INT cast
+                    DecimalFormat df = new DecimalFormat("0.#");
+                    pText.setText(String.valueOf(df.format(plates.get(i).getWeight() / 2)));              // TODO: Remove divide by 2 after updating database AND remember to multiply weights * 2, additionally remove INT cast
 
                     // margins with left 1 dp, right 2 dp
                     lp.setMargins(marginLeft, 0, marginRight, 0);

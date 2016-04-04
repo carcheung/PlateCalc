@@ -54,8 +54,9 @@ public class SetupActivity extends AppCompatActivity {
 
     public void userSetup() {
         Intent intent = new Intent(this, WeightCalculateActivity.class);
-        startActivity(intent);
         finish();
+        startActivity(intent);
+  //      finish();
     }
 
 }

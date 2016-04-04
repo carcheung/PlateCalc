@@ -3,9 +3,11 @@ package com.carolyncheung.calc.fragments;
 import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.carolyncheung.calc.R;
@@ -13,14 +15,16 @@ import com.carolyncheung.calc.data.DBHandler;
 import com.carolyncheung.calc.data.PlateData;
 import com.carolyncheung.calc.helpers.ListViewAdapter;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import static com.carolyncheung.calc.data.Constant.AMOUNT_COLUMN;
+import static com.carolyncheung.calc.data.Constant.ID_COLUMN;
 import static com.carolyncheung.calc.data.Constant.MULTIPLY_COLUMN;
 import static com.carolyncheung.calc.data.Constant.UNIT_COLUMN;
 import static com.carolyncheung.calc.data.Constant.WEIGHT_COLUMN;
-
+import static com.carolyncheung.calc.data.Constant.ADD_PLATES_BUTTON;
 
 /**
  * Created by Carolyn Cheung on 2/28/2016.
@@ -29,6 +33,7 @@ public class DisplayPlateSetFragment extends Fragment{
     private ListView elv;
     private ArrayList<HashMap<String, String>> list;
     ArrayList<PlateData> plate_set;
+    ImageView add;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -45,8 +50,7 @@ public class DisplayPlateSetFragment extends Fragment{
         elv = (ListView) v.findViewById(R.id.listView_plates);
         list = new ArrayList<HashMap<String, String>>();
 
-        // TODO: Change units after having shared preferences setup
-        plate_set = populateList(); //db.getPlateSet(1);
+        plate_set = populateList(db); //db.getPlateSet(1);
 
         ListViewAdapter adapter = new ListViewAdapter(this, list, plate_set);
         elv.setAdapter(adapter);
@@ -54,10 +58,37 @@ public class DisplayPlateSetFragment extends Fragment{
         return v;
     }
 
-    public ArrayList<PlateData> populateList() {
+    public ArrayList<PlateData> populateList(DBHandler db) {
         ArrayList<PlateData> p = new ArrayList<PlateData>();
-        HashMap<String, String> pMap = new HashMap<String, String>();
+        double weight;
+        String unit = "lbs";
 
+        // TODO: Change units after having shared preferences setup
+        p = db.getPlateSet(2);
+        for (int i = 0; i < p.size(); i++) {
+            HashMap<String, String> pMap = new HashMap<String, String>();
+            pMap.put(ID_COLUMN, Integer.toString(p.get(i).getId()));
+
+            Log.d("ID: ", Integer.toString(p.get(i).getId()));
+
+            pMap.put(AMOUNT_COLUMN, Integer.toString(p.get(i).getAmount()));
+            pMap.put(MULTIPLY_COLUMN, "x");
+            if (p.get(i).getUnit() == 1) {
+                unit = "kgs";
+            } else if (p.get(i).getUnit() == 2) {
+                unit = "lbs";
+            }
+
+            weight = p.get(i).getWeight() / 2;
+            DecimalFormat df = new DecimalFormat("0.#");
+
+            pMap.put(UNIT_COLUMN, unit);
+            pMap.put(WEIGHT_COLUMN, df.format(weight));
+            list.add(pMap);
+        }
+
+
+/*
             pMap.put(AMOUNT_COLUMN, "10");
             pMap.put(MULTIPLY_COLUMN, "x");
             pMap.put(UNIT_COLUMN, "lbs");
@@ -104,7 +135,7 @@ public class DisplayPlateSetFragment extends Fragment{
         pMap6.put(UNIT_COLUMN, "lbs");
         pMap6.put(WEIGHT_COLUMN, "2.5");
         list.add(pMap6);
-
+*/
         return p;
     }
 
