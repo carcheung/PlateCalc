@@ -1,6 +1,7 @@
 package com.carolyncheung.calc.fragments;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -14,6 +15,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.carolyncheung.calc.R;
+import com.carolyncheung.calc.activities.WeightAddActivity;
+import com.carolyncheung.calc.activities.WeightCalculateActivity;
 
 /**
  * Created by Carolyn Cheung on 2/26/2016.
@@ -56,6 +59,8 @@ public class ActionBarFragment extends Fragment {
         switch (item.getItemId()) {
             case R.id.barAdd:
                 Log.v("ActionBarFragment", "barAdd");
+                Intent intent = new Intent(getActivity(), WeightAddActivity.class);
+                startActivity(intent);
                 return true;
             case R.id.barCalc:
                 Log.v("ActionBarFragment", "barCalc");

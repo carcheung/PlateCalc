@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">I CANT MATH</string>
+    <string name="not_enough_weights">No more weights. Currently </string>
 </resources>

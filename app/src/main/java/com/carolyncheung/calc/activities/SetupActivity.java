@@ -3,6 +3,7 @@ package com.carolyncheung.calc.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
 import com.carolyncheung.calc.R;
 import com.carolyncheung.calc.data.DBHandler;
@@ -20,16 +21,9 @@ public class SetupActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setup);
 
-        if (SharedPreferencesHelper.getBool(this, SharedPreferencesHelper.USER_SETUP, true)) {
-            userSetup();
-        } else {
+        if (SharedPreferencesHelper.getBool(this, SharedPreferencesHelper.USER_SETUP, false) == false) {
             createDB();
         }
-
-
-        // user is all setup and g2g
-        SharedPreferencesHelper.putBool(SetupActivity.this,
-                SharedPreferencesHelper.USER_SETUP, true);
 
         Intent intent = new Intent(SetupActivity.this, WeightCalculateActivity.class);
         startActivity(intent);
@@ -39,7 +33,7 @@ public class SetupActivity extends AppCompatActivity {
         DBHandler db = new DBHandler(this);
 
         try {
-            db.createDataBase();;
+            db.createDataBase();
         } catch (IOException ioe) {
             throw new Error("Unable to create database");
         }
@@ -50,13 +44,9 @@ public class SetupActivity extends AppCompatActivity {
         }
 
         db.close();
-    }
 
-    public void userSetup() {
-        Intent intent = new Intent(this, WeightCalculateActivity.class);
-        finish();
-        startActivity(intent);
-  //      finish();
+        // user is all setup and g2g
+        SharedPreferencesHelper.putBool(SetupActivity.this,
+                SharedPreferencesHelper.USER_SETUP, true);
     }
-
 }

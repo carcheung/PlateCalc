@@ -81,6 +81,7 @@ public class DBHandler extends SQLiteOpenHelper {
         boolean dbExist = checkDatabase();
 
         if (dbExist) {
+            Log.d("createDatabase()", "DATABASE EXISTS");
             // do nothing
         } else {
             this.getReadableDatabase();
@@ -198,6 +199,18 @@ public class DBHandler extends SQLiteOpenHelper {
         ContentValues args = new ContentValues();
         int amt = getAmount(id);
         amt++;
+
+        args.put(KEY_PLATE_AMOUNT, amt);
+        db.update(TABLE_PLATE, args, KEY_ID + "=" + id, null);
+    }
+
+    public void removeAmount(int id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues args = new ContentValues();
+        int amt = getAmount(id);
+        if (amt > 0) {
+            amt--;
+        }
 
         args.put(KEY_PLATE_AMOUNT, amt);
         db.update(TABLE_PLATE, args, KEY_ID + "=" + id, null);

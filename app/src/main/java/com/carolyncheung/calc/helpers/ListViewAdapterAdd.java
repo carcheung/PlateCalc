@@ -2,47 +2,41 @@ package com.carolyncheung.calc.helpers;
 
 import android.app.Fragment;
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.carolyncheung.calc.R;
 import com.carolyncheung.calc.data.DBHandler;
 import com.carolyncheung.calc.data.PlateData;
-import static com.carolyncheung.calc.data.Constant.AMOUNT_COLUMN;
-import static com.carolyncheung.calc.data.Constant.ID_COLUMN;
-import static com.carolyncheung.calc.data.Constant.MULTIPLY_COLUMN;
-import static com.carolyncheung.calc.data.Constant.UNIT_COLUMN;
-import static com.carolyncheung.calc.data.Constant.WEIGHT_COLUMN;
-import static com.carolyncheung.calc.data.Constant.ADD_PLATES_BUTTON;
-import static com.carolyncheung.calc.data.Constant.MINUS_PLATES_BUTTON;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import static com.carolyncheung.calc.data.Constant.ID_COLUMN;
+import static com.carolyncheung.calc.data.Constant.MULTIPLY_COLUMN;
+import static com.carolyncheung.calc.data.Constant.UNIT_COLUMN;
+import static com.carolyncheung.calc.data.Constant.WEIGHT_COLUMN;
+
 /**
- * Created by Carolyn Cheung on 2/28/2016.
+ * Created by Carolyn Cheung on 6/13/2016.
+ * ListViewAdapter
  */
-public class ListViewAdapter extends BaseAdapter{
+public class ListViewAdapterAdd extends BaseAdapter{
     public ArrayList<HashMap<String, String>> list;
     Fragment fragment;
     ArrayList<PlateData> plate_set;
     String id = "999";
 
-    public ListViewAdapter(Fragment fragment, ArrayList<HashMap<String, String>> list,
-                           ArrayList<PlateData> plate_set) {
+    public ListViewAdapterAdd(Fragment fragment, ArrayList<HashMap<String, String>> list,
+                              ArrayList<PlateData> plate_set) {
         super();
         this.fragment = fragment;
         this.list = list;
         this.plate_set = plate_set;
-        this.id = id;
     }
 
     @Override
@@ -71,10 +65,11 @@ public class ListViewAdapter extends BaseAdapter{
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
-
-        ViewHolder holder;
+        final Context c = parent.getContext();
+        final DBHandler db = new DBHandler(c);
+        final ViewHolder holder;
+        final int plate_id = plate_set.get(position).getId();
         LayoutInflater inflater = fragment.getActivity().getLayoutInflater();
-        int index = position;
 
         if (convertView == null) {
             convertView = inflater.inflate(R.layout.listview_plate_amount_modifier, null);
@@ -91,29 +86,34 @@ public class ListViewAdapter extends BaseAdapter{
             holder = (ViewHolder) convertView.getTag();
         }
 
+        // map info from fragment to the listview
         HashMap<String, String> map = list.get(position);
         holder.plateSize.setText(map.get(WEIGHT_COLUMN));
         holder.plateUnit.setText(map.get(UNIT_COLUMN));
-        holder.plateAmount.setText(map.get(AMOUNT_COLUMN));
         holder.multiply.setText(map.get(MULTIPLY_COLUMN));
+        // info taken from database
+        holder.plateAmount.setText(Integer.toString(plate_set.get(position).getAmount()));
 
         this.id = map.get(ID_COLUMN);
 
-
-        final ImageView iPlus = holder.plus;
-        iPlus.setOnClickListener(new View.OnClickListener() {
+        final ImageView plus = holder.plus;
+        plus.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-
-                Log.d("HI", id);
-                Context c = iPlus.getContext();
-                DBHandler db = new DBHandler(c);
-
-                db.addAmount(Integer.parseInt(id));
+                int amt = plate_set.get(position).getAmount() + 1;
+                plate_set.get(position).setAmount(amt);
+                holder.plateAmount.setText(Integer.toString(plate_set.get(position).getAmount()));
             }
+        });
 
+        final ImageView minus = holder.minus;
+        minus.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                int amt = plate_set.get(position).getAmount() - 1;
+                plate_set.get(position).setAmount(amt);
+                holder.plateAmount.setText(Integer.toString(plate_set.get(position).getAmount()));
+            }
         });
 
         return convertView;
     }
-
 }
