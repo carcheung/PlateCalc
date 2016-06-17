@@ -2,6 +2,8 @@ package com.carolyncheung.calc.helpers;
 
 import android.app.Fragment;
 import android.content.Context;
+import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,8 +12,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.carolyncheung.calc.R;
+import com.carolyncheung.calc.activities.WeightAddActivity;
 import com.carolyncheung.calc.data.DBHandler;
 import com.carolyncheung.calc.data.PlateData;
+import com.carolyncheung.calc.fragments.DisplayPlateSetAddFragment;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -20,6 +24,7 @@ import static com.carolyncheung.calc.data.Constant.ID_COLUMN;
 import static com.carolyncheung.calc.data.Constant.MULTIPLY_COLUMN;
 import static com.carolyncheung.calc.data.Constant.UNIT_COLUMN;
 import static com.carolyncheung.calc.data.Constant.WEIGHT_COLUMN;
+import static com.carolyncheung.calc.data.Constant.AMOUNT_COLUMN;
 
 /**
  * Created by Carolyn Cheung on 6/13/2016.
@@ -27,11 +32,13 @@ import static com.carolyncheung.calc.data.Constant.WEIGHT_COLUMN;
  */
 public class ListViewAdapterAdd extends BaseAdapter{
     public ArrayList<HashMap<String, String>> list;
-    Fragment fragment;
-    ArrayList<PlateData> plate_set;
+    DisplayPlateSetAddFragment fragment;
+    private ArrayList<PlateData> plate_set;
     String id = "999";
 
-    public ListViewAdapterAdd(Fragment fragment, ArrayList<HashMap<String, String>> list,
+    private DataTransferInterface data;
+
+    public ListViewAdapterAdd(DisplayPlateSetAddFragment fragment, ArrayList<HashMap<String, String>> list,
                               ArrayList<PlateData> plate_set) {
         super();
         this.fragment = fragment;
@@ -45,8 +52,8 @@ public class ListViewAdapterAdd extends BaseAdapter{
     }
 
     @Override
-    public Object getItem(int position) {
-        return list.get(position);
+    public String getItem(int position) {
+        return list.get(position).get(WEIGHT_COLUMN);
     }
 
     @Override
@@ -91,17 +98,21 @@ public class ListViewAdapterAdd extends BaseAdapter{
         holder.plateSize.setText(map.get(WEIGHT_COLUMN));
         holder.plateUnit.setText(map.get(UNIT_COLUMN));
         holder.multiply.setText(map.get(MULTIPLY_COLUMN));
-        // info taken from database
         holder.plateAmount.setText(Integer.toString(plate_set.get(position).getAmount()));
 
         this.id = map.get(ID_COLUMN);
 
         final ImageView plus = holder.plus;
         plus.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
                 int amt = plate_set.get(position).getAmount() + 1;
                 plate_set.get(position).setAmount(amt);
-                holder.plateAmount.setText(Integer.toString(plate_set.get(position).getAmount()));
+                list.get(position).put(AMOUNT_COLUMN, Integer.toString(amt));
+                notifyDataSetChanged();
+
+                WeightAddActivity w = (WeightAddActivity) fragment.getActivity();
+                w.calculateAddedWeight(plate_set);
             }
         });
 
@@ -110,10 +121,27 @@ public class ListViewAdapterAdd extends BaseAdapter{
             public void onClick(View v) {
                 int amt = plate_set.get(position).getAmount() - 1;
                 plate_set.get(position).setAmount(amt);
-                holder.plateAmount.setText(Integer.toString(plate_set.get(position).getAmount()));
+                //holder.plateAmount.setText(Integer.toString(plate_set.get(position).getAmount()));
+                list.get(position).put(AMOUNT_COLUMN, Integer.toString(amt));
+                notifyDataSetChanged();
+
+                WeightAddActivity w = (WeightAddActivity) fragment.getActivity();
+                w.calculateAddedWeight(plate_set);
             }
         });
 
         return convertView;
+    }
+
+    public interface DataTransferInterface {
+        public void setValues(int position);
+    }
+
+    public ArrayList<PlateData> sendPlateData(){
+        Log.d("ADAPTER: ", "Sending plate_set");
+        for (int i = 0; i < plate_set.size(); i++) {
+            Log.d("Plate: ", Integer.toString(plate_set.get(i).getAmount()));
+        }
+        return plate_set;
     }
 }

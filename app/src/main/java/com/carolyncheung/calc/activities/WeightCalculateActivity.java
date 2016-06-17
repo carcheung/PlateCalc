@@ -120,7 +120,6 @@ public class WeightCalculateActivity extends AppCompatActivity {
         int plateSize;
         int plateColor;
 
-
         do {
             if(plates.get(i).getAmount() > 0) {
                 numOfPlate = (int) (w / plates.get(i).getWeight());
@@ -219,14 +218,10 @@ public class WeightCalculateActivity extends AppCompatActivity {
                     textLp.addRule(12);                             // align parent bottom
                     pText.setLayoutParams(textLp);
 
-                    Log.d("imgStart AFTER Setting", Integer.toString(imgStart));
-
                     RelativeLayout frameT = (RelativeLayout)findViewById(R.id.frame);
                     frameT.addView(pImg);
                     imgStart = pImg.getId();
                     frameT.addView(pText);
-
-                    Log.d("HELLO", Double.toString(plates.get(i).getWeight()));
 
                     // align barEnd to the last plate added
                     RelativeLayout.LayoutParams barEndLp = new RelativeLayout.
@@ -245,6 +240,7 @@ public class WeightCalculateActivity extends AppCompatActivity {
             i++;
             if (i >= plates.size() && w > 0) {
                 Context context = getApplicationContext();
+                // TODO: Add this string to string.xml
                 String text = getString(R.string.not_enough_weights);
                 String remaining_weight = " " + Double.toString(weight - w) + " lbs";
                 text += remaining_weight;

@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.carolyncheung.calc.R;
+import com.carolyncheung.calc.activities.AddPlateActivity;
 import com.carolyncheung.calc.activities.WeightAddActivity;
 import com.carolyncheung.calc.activities.WeightCalculateActivity;
 
@@ -64,6 +65,8 @@ public class ActionBarFragment extends Fragment {
                 return true;
             case R.id.barCalc:
                 Log.v("ActionBarFragment", "barCalc");
+                intent = new Intent(getActivity(), AddPlateActivity.class);
+                startActivity(intent);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

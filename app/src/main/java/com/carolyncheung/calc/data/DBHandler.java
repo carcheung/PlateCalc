@@ -52,6 +52,8 @@ public class DBHandler extends SQLiteOpenHelper {
     /* Unit table */
     public static final String KEY_UNIT_NAME = "u_name";
 
+    // TODO: query to fill database with standard plates incase the users want to reset all values
+
     private SQLiteDatabase myDatabase;
 
     private final Context myContext;
@@ -147,7 +149,44 @@ public class DBHandler extends SQLiteOpenHelper {
 
     // add a plate to the database given a plate
     public void addPlate(PlateData plate) {
-        // TODO: Add a function to add plates
+        SQLiteDatabase db = this.getWritableDatabase();
+        String color_name = plate.getColor();
+        String select_query = "SELECT " + KEY_ID + " FROM " + TABLE_COLOR + " WHERE "
+            + KEY_COLOR_NAME + " = " + "\"" + color_name + "\"";
+        Cursor cursor = db.rawQuery(select_query, null);
+
+        if(cursor != null) {
+            cursor.moveToFirst();
+        }
+
+        int color = cursor.getInt(0);
+
+        // INSERT into plate(size, amount, weight, unit, color) VALUES (1, 10, 100, 2, 1)
+        // Create new map of values, where column names are the keys
+        ContentValues values = new ContentValues();
+        values.put(KEY_SIZE, plate.getSize());
+        values.put(KEY_PLATE_AMOUNT, plate.getAmount());
+        values.put(KEY_PLATE_WEIGHT, plate.getWeight());
+        values.put(KEY_PLATE_UNIT, plate.getUnit());
+        values.put(KEY_PLATE_COLOR, color);
+
+        db.insert(TABLE_PLATE, null, values);
+    }
+
+    public void removePlate(PlateData plate) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        int p_id = plate.getId();
+        double weight = plate.getWeight();
+
+        // DELETE FROM plate WHERE _id = 17
+        String selection = KEY_ID + " LIKE ?";
+        String[] selectionArgs = {Integer.toString(p_id)};
+
+        // TODO: CHANGE THIS LATER BACK TO DELETE BY ID: THIS IS FOR TESTING PURPOSE
+        selection = KEY_PLATE_WEIGHT + " LIKE ?";
+        String[] selectionArg = {Double.toString(weight)};
+
+        db.delete(TABLE_PLATE, selection, selectionArg);
     }
 
     // get a set of plates from the database based on the units user is using

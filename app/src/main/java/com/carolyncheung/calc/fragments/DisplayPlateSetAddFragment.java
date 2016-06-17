@@ -1,8 +1,10 @@
 package com.carolyncheung.calc.fragments;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,9 +30,10 @@ import static com.carolyncheung.calc.data.Constant.WEIGHT_COLUMN;
  * Creates a list of all plates available to the user
  */
 public class DisplayPlateSetAddFragment extends Fragment {
+    Activity activity;
     private ListView elv;
     private ArrayList<HashMap<String, String>> list;
-    ArrayList<PlateData> plate_set;
+    public ArrayList<PlateData> plate_set;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -85,5 +88,16 @@ public class DisplayPlateSetAddFragment extends Fragment {
             list.add(pMap);
         }
         return p;
+    }
+
+    public ArrayList<PlateData> sendPlateData(){
+        for (int i = 0; i < plate_set.size(); i++) {
+
+            Object o = elv.getAdapter().getItem(i);
+            Log.d("elv", o.toString());
+        }
+
+
+        return plate_set;
     }
 }

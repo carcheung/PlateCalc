@@ -18,6 +18,7 @@
         <activity android:name=".activities.WeightCalculateActivity"
             android:windowSoftInputMode="adjustPan"/>
         <activity android:name=".activities.WeightAddActivity" />
+        <activity android:name=".activities.AddPlateActivity" />
     </application>
 
 </manifest>
