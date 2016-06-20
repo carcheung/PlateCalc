@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="String_array_TEST">
+        <item>Item 1</item>
+        <item>Item 2</item>
+        <item>Item 3</item>
+        <item>Item 4</item>
+    </string-array>
+
+    <string-array name="String_array_TEST_VALUES">
+        <item>Item</item>
+        <item>Item</item>
+        <item>Item</item>
+        <item>Item</item>
+    </string-array>
+
+    <string-array name="units_entries">
+        <item>Kilograms</item>
+        <item>Pounds</item>
+    </string-array>
+
+    <string-array name="units_values">
+        <item>kg</item>
+        <item>lbs</item>
+    </string-array>
+
+    <string-array name="inc_entries">
+        <item>1</item>
+        <item>5</item>
+        <item>10</item>
+        <item>25</item>
+    </string-array>
+    <string-array name="inc_values">
+        <item>1</item>
+        <item>5</item>
+        <item>10</item>
+        <item>25</item>
+    </string-array>
+</resources>

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory
+        android:title="Settings"
+        android:key="pref_key_settings">
+        <ListPreference
+            android:key="pref_key_settings_units"
+            android:title="Unit System"
+            android:summary="Change unit system"
+            android:dialogTitle="Unit System"
+            android:entries="@array/units_entries"
+            android:entryValues="@array/units_values"
+            android:defaultValue="@string/default_val_unit"/>
+        <ListPreference
+            android:key="pref_key_settings_inc"
+            android:title="Weight Increment"
+            android:entries="@array/inc_entries"
+            android:entryValues="@array/inc_values"
+            android:defaultValue="@string/default_val_inc"/>
+        <CheckBoxPreference
+            android:key="pref_key_settings_rounding"
+            android:title="Rounding"
+            android:summary="Round to the nearest 5 or 0"
+            android:defaultValue="true"/>
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="Weights"
+        android:key="pref_key_weight">
+        <ListPreference
+            android:key="pref_key_weight_units"
+            android:title="Units"
+            android:summary="Change plate unit"
+            android:dialogTitle="Choose unit"
+            android:entries="@array/units_entries"
+            android:entryValues="@array/units_values"
+            android:defaultValue="@string/default_val_unit"/>
+        <Preference
+            android:key="pref_key_weight_mod_plate_inventory"
+            android:title="Plates"
+            android:summary="Modify plate inventory"/>
+        <Preference
+            android:key="pref_key_weight_mod_bar_inv"
+            android:title="Barbells"
+            android:summary="Modify barbell inventory"/>
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="Other"
+        android:key="pref_key_other">
+        <Preference
+            android:key="pref_key_other_change"
+            android:title="Change Log" />
+        <Preference
+            android:key="pref_key_other_change"
+            android:title="Rate Me"
+            android:summary="If you like this gimme 5 stars"/>
+        <Preference
+            android:key="pref_key_other_donate"
+            android:title="Donate"
+            android:summary="pls im pore"/>
+        <Preference
+            android:key="pref_key_other_about"
+            android:title="About"/>
+    </PreferenceCategory>
+<!--
+    <PreferenceScreen
+        android:key="button_voicemail_category_key"
+        android:title="PREFSCREEN NESTD"
+        android:persistent="false">
+        <ListPreference
+            android:key="button_voicemail_provider_key"
+            android:title="BSBSBSBS"/>
+
+        <PreferenceScreen
+            android:key="button_voicemail_setting_key"
+            android:title="moreBSBSBS"
+            android:persistent="false">
+            ...
+        </PreferenceScreen>
+        <RingtonePreference
+            android:key="button_voicemail_ringtone_key"
+            android:title="Some bs"
+            android:ringtoneType="notification"/>
+    </PreferenceScreen> -->
+
+    <!-- can use intents to open activity instead of a settings screen
+    <Preference android:title="@string/prefs_web_page" >
+    <intent android:action="android.intent.action.VIEW"
+            android:data="http://www.example.com" />
+    </Preference>
+    -->
+</PreferenceScreen>

@@ -17,8 +17,11 @@
 
         <activity android:name=".activities.WeightCalculateActivity"
             android:windowSoftInputMode="adjustPan"/>
-        <activity android:name=".activities.WeightAddActivity" />
-        <activity android:name=".activities.AddPlateActivity" />
+        <activity android:name=".activities.WeightAddActivity"/>
+        <activity android:name=".activities.AddPlateActivity"/>
+        <activity android:name=".activities.SettingsActivity"
+            android:theme="@style/Preference_theme"/>
+        <activity android:name=".activities.ModPlatesActivity"/>
     </application>
 
 </manifest>

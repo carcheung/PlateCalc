@@ -61,6 +61,8 @@ public class DisplayPlateSetAddFragment extends Fragment {
         return v;
     }
 
+
+
     public ArrayList<PlateData> populateList(DBHandler db) {
         ArrayList<PlateData> p = new ArrayList<PlateData>();
         double weight;

@@ -2,6 +2,8 @@ package com.carolyncheung.calc.data;
 
 /**
  * Created by Carolyn Cheung on 2/27/2016.
+ * PlateData object for information on plate
+ * unit: 1 = metric, 2 = FREEDOM UNITS
  */
 public class PlateData {
     private int id;

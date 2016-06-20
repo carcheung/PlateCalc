@@ -13,4 +13,22 @@
         android:title="Settings"
         app:showAsAction="ifRoom"
         />
+    <item
+        android:id="@+id/settings"
+        android:icon="@drawable/settings"
+        android:title="Settings"
+        app:showAsAction="ifRoom"
+        />
+    <item
+        android:id="@+id/modPlates"
+        android:icon="@drawable/settings"
+        android:title="Modify Plates"
+        app:showAsAction="never"
+        />
+    <item
+        android:id="@+id/createPlate"
+        android:icon="@drawable/settings"
+        android:title="Create Plate"
+        app:showAsAction="never"
+        />
 </menu>

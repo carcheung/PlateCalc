@@ -4,6 +4,13 @@
     android:layout_height="match_parent"
     style="@style/AppTheme">
     <!-- Dummy layout so that the keyboard doesnt immediately popup -->
+    <LinearLayout
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:layout_width="0px"
+        android:layout_height="0px"
+        android:id="@+id/FOCUS_DUMMY"
+        android:orientation="horizontal" />
 
     <fragment
         android:layout_width="match_parent"
@@ -320,7 +327,10 @@
                     android:textSize="30sp"
                     android:textAlignment="center"
                     android:text="135"
-                    android:layout_centerInParent="true" />
+                    android:cursorVisible="false"
+                    android:layout_centerInParent="true"
+                    android:selectAllOnFocus="true"
+                    android:imeOptions="actionDone"/>
 
                 <TextView
                     android:layout_width="wrap_content"

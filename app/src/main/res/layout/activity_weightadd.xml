@@ -175,7 +175,7 @@
                     android:textColor="@color/white"
                     android:textSize="30sp"
                     android:textAlignment="center"
-                    android:text="135"
+                    android:text="45"
                     android:layout_centerInParent="true" />
 
                 <TextView

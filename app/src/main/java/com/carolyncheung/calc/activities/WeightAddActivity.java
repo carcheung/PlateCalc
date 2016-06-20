@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.carolyncheung.calc.R;
 import com.carolyncheung.calc.data.DBHandler;
+import com.carolyncheung.calc.data.Constant;
 import com.carolyncheung.calc.data.PlateData;
 import com.carolyncheung.calc.fragments.DisplayPlateSetAddFragment;
 import com.carolyncheung.calc.helpers.ListViewAdapterAdd;
@@ -26,9 +27,6 @@ import java.util.ArrayList;
 public class WeightAddActivity extends AppCompatActivity {
     private TextView weight_input;
     private RelativeLayout frame;
-
-    int[] plate_rid = {R.id.plate1, R.id.plate2, R.id.plate3, R.id.plate4, R.id.plate5,
-            R.id.plate6, R.id.plate7, R.id.plate8, R.id.plate9, R.id.plate10};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -236,7 +234,8 @@ public class WeightAddActivity extends AppCompatActivity {
     public void clearPlates() {
         ImageView plate;
         for (int i = 0; i < 10; i++) {
-            plate = (ImageView) findViewById(plate_rid[i]);
+            plate = (ImageView) findViewById(Constant.plate_rID[i]);
+            Log.d("CRASH","HERE");
             plate.setImageDrawable(null);
             plate.setBackgroundColor(0x00000000);
             plate.destroyDrawingCache();

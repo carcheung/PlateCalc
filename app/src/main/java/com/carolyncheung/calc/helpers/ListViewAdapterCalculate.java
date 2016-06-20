@@ -79,7 +79,7 @@ public class ListViewAdapterCalculate extends BaseAdapter{
         final ViewHolder holder;
         final int plate_id = plate_set.get(position).getId();
         LayoutInflater inflater = fragment.getActivity().getLayoutInflater();
-
+        Log.d("GETTING VIEW", "WTF");
         if (convertView == null) {
             convertView = inflater.inflate(R.layout.listview_plate_amount_modifier, null);
             holder = new ViewHolder();

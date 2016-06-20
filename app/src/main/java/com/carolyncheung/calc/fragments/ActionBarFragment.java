@@ -16,8 +16,11 @@ import android.view.ViewGroup;
 
 import com.carolyncheung.calc.R;
 import com.carolyncheung.calc.activities.AddPlateActivity;
+import com.carolyncheung.calc.activities.ModPlatesActivity;
+import com.carolyncheung.calc.activities.SettingsActivity;
 import com.carolyncheung.calc.activities.WeightAddActivity;
 import com.carolyncheung.calc.activities.WeightCalculateActivity;
+import com.carolyncheung.calc.data.Constant;
 
 /**
  * Created by Carolyn Cheung on 2/26/2016.
@@ -37,6 +40,10 @@ public class ActionBarFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                          Bundle savedInstanceState) {
+
+        // get bundle arguments
+        Bundle bundle = getArguments();
+
         // inflate a new view hierarchy
         // int resource, ViewGroup, the parent of the generated hierarchy
         // false means root is only used to create correct subclass of layout params
@@ -44,6 +51,16 @@ public class ActionBarFragment extends Fragment {
         Toolbar actionBar = (Toolbar) view.findViewById(R.id.action_bar);
         ((AppCompatActivity) getActivity()).setSupportActionBar(actionBar);
         actionBar.setTitleTextColor(getResources().getColor(R.color.white));
+
+        // if the bundle is not null, we want to modify the toolbar depending on
+        // what activity has called it
+        if (bundle != null) {
+            if (bundle.getString(Constant.FROM_ACTIVITY, "HELLO").equals(Constant.ACTIVITY_ADDPLATE)) {
+                // remove title
+                ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(false);
+                actionBar.inflateMenu(R.menu.menu_save);
+            }
+        }
 
         return view;
     }
@@ -53,6 +70,12 @@ public class ActionBarFragment extends Fragment {
         inflater = getActivity().getMenuInflater();
         inflater.inflate(R.menu.menu_tool_bar, menu);
         super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    // TODO: FIX LATER SO ITS JUST THE SAVE OR BACK OR W/e BUTTON BUT YOU KNOW LET IT LIKE. POPULATE BASED ON BUNDLE ARGS OR SOME SHIT IDK
+    @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        //menu.clear();
     }
 
     @Override
@@ -65,9 +88,25 @@ public class ActionBarFragment extends Fragment {
                 return true;
             case R.id.barCalc:
                 Log.v("ActionBarFragment", "barCalc");
+                intent = new Intent(getActivity(), WeightCalculateActivity.class);
+                startActivity(intent);
+                return true;
+            case R.id.settings:
+                Log.v("ActionBarFragment", "settings");
+                intent = new Intent(getActivity(), SettingsActivity.class);
+                startActivity(intent);
+                return true;
+            case R.id.modPlates:
+                Log.v("ActionBarFragment", "settings");
+                intent = new Intent(getActivity(), ModPlatesActivity.class);
+                startActivity(intent);
+                return true;
+            case R.id.createPlate:
+                Log.v("ActionBarFragment", "settings");
                 intent = new Intent(getActivity(), AddPlateActivity.class);
                 startActivity(intent);
                 return true;
+
             default:
                 return super.onOptionsItemSelected(item);
         }

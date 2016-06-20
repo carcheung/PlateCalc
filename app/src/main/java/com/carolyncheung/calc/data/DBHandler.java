@@ -217,6 +217,30 @@ public class DBHandler extends SQLiteOpenHelper {
         return plate_set;
     }
 
+    // get all plates from the database, ordered by units/weight
+    public ArrayList<PlateData> getAllPlates() {
+        ArrayList<PlateData> plate_set = new ArrayList<PlateData>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        String select_query = "SELECT * FROM " + TABLE_PLATE + " ORDER BY " + KEY_PLATE_UNIT + " , "
+                + KEY_PLATE_WEIGHT + " DESC";
+
+        Cursor curosr = db.rawQuery(select_query, null);
+        if (curosr.moveToFirst()) {
+            do {
+                int id = curosr.getInt(0);
+                int size = curosr.getInt(1);
+                int amount = curosr.getInt(2);
+                double weight = 2 * curosr.getDouble(3);
+                int unit = curosr.getInt(4);
+                String color = curosr.getString(5);
+                PlateData plate = new PlateData(id, color, size, amount, weight, unit);
+                plate_set.add(plate);
+            } while (curosr.moveToNext());
+        }
+
+        return plate_set;
+    }
+
     public int getAmount(int id) {
         int amt;
         SQLiteDatabase db = this.getReadableDatabase();
