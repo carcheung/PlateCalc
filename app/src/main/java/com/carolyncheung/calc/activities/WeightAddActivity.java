@@ -19,10 +19,13 @@ import com.carolyncheung.calc.data.PlateData;
 import com.carolyncheung.calc.fragments.DisplayPlateSetAddFragment;
 import com.carolyncheung.calc.helpers.ListViewAdapterAdd;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 /**
  * Created by Carolyn Cheung on 6/13/2016.
+ * Allows users to add up to 10 plates of any kind to the bar, will calculate the weight
+ * based on the plates that the user has added
  */
 public class WeightAddActivity extends AppCompatActivity {
     private TextView weight_input;
@@ -227,7 +230,9 @@ public class WeightAddActivity extends AppCompatActivity {
         barEndLp.addRule(15);
 
         barEnd.setLayoutParams(barEndLp);
-        total_weight.setText(Double.toString(weight));
+        DecimalFormat format = new DecimalFormat("0.#");
+
+        total_weight.setText(format.format(weight));
 
     }
 
@@ -235,7 +240,6 @@ public class WeightAddActivity extends AppCompatActivity {
         ImageView plate;
         for (int i = 0; i < 10; i++) {
             plate = (ImageView) findViewById(Constant.plate_rID[i]);
-            Log.d("CRASH","HERE");
             plate.setImageDrawable(null);
             plate.setBackgroundColor(0x00000000);
             plate.destroyDrawingCache();

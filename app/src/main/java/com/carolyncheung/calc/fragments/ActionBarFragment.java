@@ -54,11 +54,11 @@ public class ActionBarFragment extends Fragment {
 
         // if the bundle is not null, we want to modify the toolbar depending on
         // what activity has called it
+        // TODO: REMOVE THIS MAYBE ?
         if (bundle != null) {
-            if (bundle.getString(Constant.FROM_ACTIVITY, "HELLO").equals(Constant.ACTIVITY_ADDPLATE)) {
+            if (bundle.getString(Constant.FROM_ACTIVITY, "default").equals(Constant.ACTIVITY_ADDPLATE)) {
                 // remove title
                 ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(false);
-                actionBar.inflateMenu(R.menu.menu_save);
             }
         }
 

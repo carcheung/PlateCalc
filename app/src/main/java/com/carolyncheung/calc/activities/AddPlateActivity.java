@@ -10,7 +10,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
@@ -18,11 +17,12 @@ import com.carolyncheung.calc.R;
 import com.carolyncheung.calc.data.DBHandler;
 import com.carolyncheung.calc.data.Constant;
 import com.carolyncheung.calc.data.PlateData;
-import com.carolyncheung.calc.fragments.ActionBarFragment;
+import com.carolyncheung.calc.fragments.ActionBarAddPlateFragment;
 
 /**
  * Created by Carolyn Cheung on 6/17/2016.
- * Activity to create a new plate
+ * Activity to create a new plate, lets users create custom plates based
+ * on user specifications
  */
 public class AddPlateActivity extends AppCompatActivity implements View.OnClickListener{
     private PlateData plate = new PlateData();
@@ -40,7 +40,7 @@ public class AddPlateActivity extends AppCompatActivity implements View.OnClickL
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         // add arguments and tag/commit
-        ActionBarFragment save_return = new ActionBarFragment();
+        ActionBarAddPlateFragment save_return = new ActionBarAddPlateFragment();
         save_return.setArguments(bundle);
         fragmentTransaction.add(R.id.toolbar_container, save_return, "save_return");
         fragmentTransaction.commit();
@@ -52,6 +52,7 @@ public class AddPlateActivity extends AppCompatActivity implements View.OnClickL
             color_choice_IMG.setColorFilter(getResources().getColor(Constant.colors[i]), PorterDuff.Mode.ADD);
         }
 
+        // set up seekbar to slide and show sizes
         SeekBar plate_size = (SeekBar)findViewById(R.id.plate_size);
         plate_size.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             ImageView plate_IMG = (ImageView) findViewById(R.id.plate);
@@ -77,6 +78,7 @@ public class AddPlateActivity extends AppCompatActivity implements View.OnClickL
             }
         });
 
+        // select all when user clicks on edit text
         final EditText weight_edit = (EditText)findViewById(R.id.weight);
         weight_edit.setOnClickListener(new EditText.OnClickListener() {
             @Override
@@ -85,36 +87,19 @@ public class AddPlateActivity extends AppCompatActivity implements View.OnClickL
             }
         });
 
-/*      test code to test DBHandler addPlate & removePlate
-        final PlateData pd = new PlateData();
-        pd.setAmount(1);
-        pd.setSize(1);
-        pd.setColor("black");
-        pd.setUnit(2);
-        pd.setWeight(100);
-        pd.setId(20);
+        // lbs is preselected for units, maybe change it later to whatever
+        // the user has set as his/her unit preference
+        TextView lbs = (TextView)findViewById(R.id.lbs);
+        lbs.setSelected(true);
 
-        ImageView test = (ImageView) findViewById(R.id.color_3_3);
-        test.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                db.addPlate(pd);
-            }
-        });
-
-        ImageView test2 = (ImageView) findViewById(R.id.color_1_1);
-        test2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d("HELLO", "removing");
-                db.removePlate(pd);
-            }
-        }); */
+        // set plate values to initialized plate
+        plate.setColor(Constant.RED);
+        plate.setWeight(100);
+        plate.setUnit(2);
     }
 
     @Override
     public void onClick(View v) {
-        // TODO: FILL IN CASE / COLOR and UNITS etc
         ImageView plate_color = (ImageView)findViewById(R.id.plate);
         TextView kg = (TextView)findViewById(R.id.kg);
         TextView lbs = (TextView)findViewById(R.id.lbs);
@@ -157,15 +142,23 @@ public class AddPlateActivity extends AppCompatActivity implements View.OnClickL
                 break;
             case R.id.kg:
                 kg.setTextColor(ContextCompat.getColor(this, R.color.white));
+                kg.setSelected(true);
                 lbs.setTextColor(ContextCompat.getColor(this, R.color.lightGrey));
+                lbs.setSelected(false);
                 plate.setUnit(1);
                 break;
             case R.id.lbs:
                 lbs.setTextColor(ContextCompat.getColor(this, R.color.white));
+                lbs.setSelected(true);
                 kg.setTextColor(ContextCompat.getColor(this, R.color.lightGrey));
+                kg.setSelected(false);
                 plate.setUnit(2);
                 break;
         }
     }
 
+    public PlateData getPlate() {
+        return this.plate;
+
+    }
 }

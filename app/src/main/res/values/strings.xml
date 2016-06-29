@@ -16,4 +16,8 @@
     <string name="Carolyn_Cheung">Carolyn Cheung</string>
     <string name="send_feed_back">Please send any feedback to: </string>
     <string name="email">Caxcheun@gmail.com</string>
+
+    <string name="plate_saved">Plate saved</string>
+
+    <string name="undo">Undo</string>
 </resources>

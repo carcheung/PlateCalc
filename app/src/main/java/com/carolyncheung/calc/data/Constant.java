@@ -4,6 +4,7 @@ import com.carolyncheung.calc.R;
 
 /**
  * Created by Carolyn Cheung on 2/28/2016.
+ * regularly used string-key constants, and other constant resource values
  */
 public class Constant {
     // static key strings for plates
@@ -37,8 +38,10 @@ public class Constant {
     public static final String ACTIVITY_CALCULATE = "activity_calculate";
 
     // static values for res files
+    // color R values
     public static int colors[] = {R.color.red, R.color.orange, R.color.yellow, R.color.green,
             R.color.blue, R.color.indigo, R.color.violet, R.color.black, R.color.white};
+    // plate size R drawable values
     public static int plate_sizes[] = {R.drawable.plate_1_hdpi, R.drawable.plate_2_hdpi,
             R.drawable.plate_3_hdpi, R.drawable.plate_4_hdpi, R.drawable.plate_5_hdpi,
             R.drawable.plate_6_hdpi, R.drawable.plate_7_hdpi};
@@ -47,6 +50,9 @@ public class Constant {
     public static int color_choice_rID[] = {R.id.color_1_1, R.id.color_2_1, R.id.color_3_1,
             R.id.color_1_2, R.id.color_2_2, R.id.color_3_2, R.id.color_1_3, R.id.color_2_3,
             R.id.color_3_3};
+
+    // static values for plate ID, used for when I'm putting the plates on the bar
+    // and its like [Plate1][Plate2][Plate3][Plate4] ... etc
     public static int plate_rID[] = {R.id.plate1, R.id.plate2, R.id.plate3,R.id.plate4, R.id.plate5,
             R.id.plate6, R.id.plate7, R.id.plate8, R.id.plate9, R.id.plate10};
 

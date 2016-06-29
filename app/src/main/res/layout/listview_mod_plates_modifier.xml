@@ -3,43 +3,32 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     style="@style/AppTheme"
-    android:paddingLeft="10dp"
+    android:paddingLeft="20dp"
     android:paddingTop="5dp"
-    android:paddingRight="10dp"
+    android:paddingRight="20dp"
     android:paddingBottom="5dp">
 
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <CheckBox
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:id="@+id/checkBox"
-            android:checked="false"
-            android:layout_alignParentStart="false"
-            android:layout_alignParentEnd="false"
-            android:gravity="center_vertical"
-            android:layout_marginLeft="15dp"
-            android:layout_weight="1" />
+        android:layout_height="wrap_content"
+        android:minHeight="?android:attr/listPreferredItemHeight" >
 
         <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
             android:text="45"
             android:id="@+id/weight"
             android:textColor="@color/white"
-            android:textSize="40sp"
-            android:layout_marginLeft="15dp"
-            android:layout_weight="1"
-            style="@style/AppTheme" />
+            style="@style/AppTheme"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:gravity="center_vertical"
+            android:textAlignment="textStart" />
 
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_marginLeft="15dp"
             android:layout_weight="2"
             android:id="@+id/mod_plate_button">
 
@@ -50,7 +39,8 @@
                 android:id="@+id/unit"
                 android:layout_weight=".75"
                 android:textColor="@color/white"
-                android:gravity="center_vertical" />
+                android:gravity="center_vertical"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <TextView
                 android:layout_width="0dp"
@@ -60,25 +50,9 @@
                 android:layout_weight="1"
                 android:textColor="@color/white"
                 android:gravity="center_vertical"
-                android:textAlignment="textEnd" />
+                android:textAlignment="textStart"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:text="Size 10"
-                android:id="@+id/size"
-                android:layout_weight="1"
-                android:textColor="@color/white"
-                android:gravity="center_vertical"
-                android:textAlignment="viewEnd" />
-
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:id="@+id/arrow_left"
-                android:src="@drawable/chevron_right"
-                android:scaleType="fitCenter"
-                android:layout_weight="1" />
         </LinearLayout>
     </LinearLayout>
 

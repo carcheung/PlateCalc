@@ -17,6 +17,7 @@ import java.util.ArrayList;
 
 /**
  * Created by Carolyn Cheung on 2/27/2016.
+ * Database Handler
  */
 public class DBHandler extends SQLiteOpenHelper {
 
@@ -221,8 +222,9 @@ public class DBHandler extends SQLiteOpenHelper {
     public ArrayList<PlateData> getAllPlates() {
         ArrayList<PlateData> plate_set = new ArrayList<PlateData>();
         SQLiteDatabase db = this.getReadableDatabase();
-        String select_query = "SELECT * FROM " + TABLE_PLATE + " ORDER BY " + KEY_PLATE_UNIT + " , "
-                + KEY_PLATE_WEIGHT + " DESC";
+        String select_query = "SELECT * FROM " + TABLE_PLATE + " INNER JOIN " + TABLE_COLOR
+                + " ON " + TABLE_PLATE + "." + KEY_PLATE_COLOR + " = " + TABLE_COLOR + "." + KEY_ID
+                + " ORDER BY " + KEY_PLATE_UNIT  + " , " + KEY_PLATE_WEIGHT + " DESC";
 
         Cursor curosr = db.rawQuery(select_query, null);
         if (curosr.moveToFirst()) {
@@ -230,9 +232,9 @@ public class DBHandler extends SQLiteOpenHelper {
                 int id = curosr.getInt(0);
                 int size = curosr.getInt(1);
                 int amount = curosr.getInt(2);
-                double weight = 2 * curosr.getDouble(3);
+                double weight = curosr.getDouble(3);
                 int unit = curosr.getInt(4);
-                String color = curosr.getString(5);
+                String color = curosr.getString(7);
                 PlateData plate = new PlateData(id, color, size, amount, weight, unit);
                 plate_set.add(plate);
             } while (curosr.moveToNext());

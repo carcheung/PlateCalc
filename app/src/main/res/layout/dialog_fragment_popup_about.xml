@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:paddingTop="20dp"
     android:clickable="false"
-    style="@style/PopUp">
+    style="@style/AppTheme">
 
     <ImageView
         android:layout_width="wrap_content"
@@ -14,7 +14,7 @@
         android:layout_alignParentTop="true"
         android:src="@drawable/logo"
         android:paddingTop="10dp"
-        style="@style/PopUp" />
+        style="@style/AppTheme" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -28,7 +28,7 @@
         android:layout_below="@+id/logo"
         android:layout_centerHorizontal="true"
         android:paddingTop="10dp"
-        style="@style/PopUp" />
+        style="@style/AppTheme" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -42,7 +42,7 @@
         android:layout_below="@+id/Title"
         android:textColor="@color/white"
         android:paddingBottom="20dp"
-        style="@style/PopUp" />
+        style="@style/AppTheme" />
 
     <FrameLayout
         android:layout_width="fill_parent"
@@ -53,7 +53,7 @@
         android:id="@+id/divider1"
         android:layout_centerHorizontal="true"
         android:layout_alignBottom="@+id/version"
-        style="@style/PopUp" />
+        style="@style/AppTheme" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -67,7 +67,7 @@
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/divider1"
         android:paddingTop="20dp"
-        style="@style/PopUp" />
+        style="@style/AppTheme" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -81,7 +81,7 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:paddingBottom="20dp"
         android:paddingTop="15dp"
-        style="@style/PopUp" />
+        style="@style/AppTheme" />
 
     <FrameLayout
         android:layout_width="fill_parent"
@@ -91,7 +91,7 @@
         android:layout_marginRight="25dp"
         android:id="@+id/divider2"
         android:layout_below="@+id/carolyn_cheung"
-        style="@style/PopUp" />
+        style="@style/AppTheme" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -103,7 +103,7 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textColor="@color/white"
         android:paddingTop="20dp"
-        style="@style/PopUp" />
+        style="@style/AppTheme" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -116,6 +116,6 @@
         android:textColor="@color/white"
         android:paddingTop="15dp"
         android:paddingBottom="20dp"
-        style="@style/PopUp" />
+        style="@style/AppTheme" />
 
 </RelativeLayout>

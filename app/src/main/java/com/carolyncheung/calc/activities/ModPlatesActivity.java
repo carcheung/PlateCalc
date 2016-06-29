@@ -13,8 +13,14 @@ import com.carolyncheung.calc.fragments.DisplayPlateSetFragment;
 
 /**
  * Created by Carolyn Cheung on 6/19/2016.
+ * Activity that contains the features to modify database of plates
  */
-public class ModPlatesActivity extends AppCompatActivity {
+public class ModPlatesActivity extends AppCompatActivity implements DisplayPlateSetFragment.OnItemClickedListener{
+
+    @Override
+    public void OnItemClicked() {
+        // do whatever
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -30,6 +36,7 @@ public class ModPlatesActivity extends AppCompatActivity {
 
         DisplayPlateSetFragment displayPlateSetFragment = new DisplayPlateSetFragment();
         displayPlateSetFragment.setArguments(bundle);
+
         fragmentTransaction.add(R.id.show_plate_set, displayPlateSetFragment,
                 "displayPlateSetFragment");
         fragmentTransaction.commit();

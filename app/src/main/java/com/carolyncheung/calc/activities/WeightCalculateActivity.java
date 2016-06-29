@@ -20,6 +20,11 @@ import com.carolyncheung.calc.helpers.CalculationsHelper;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
+/**
+ * Created by Carolyn Cheung on 6/12/2016.
+ * Calculates the amount of plates to put on a bar, given the weight
+ */
+
 public class WeightCalculateActivity extends AppCompatActivity {
     private EditText weight_input;
     private RelativeLayout frame;

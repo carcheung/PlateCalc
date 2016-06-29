@@ -4,13 +4,13 @@
     <item
         android:id="@+id/barAdd"
         android:icon="@drawable/baradd"
-        android:title="Settings"
+        android:title="Add Weights"
         app:showAsAction="ifRoom"
         />
     <item
         android:id="@+id/barCalc"
         android:icon="@drawable/barcalc"
-        android:title="Settings"
+        android:title="Calculate Weight"
         app:showAsAction="ifRoom"
         />
     <item
@@ -29,6 +29,12 @@
         android:id="@+id/createPlate"
         android:icon="@drawable/settings"
         android:title="Create Plate"
+        app:showAsAction="never"
+        />
+    <item
+        android:id="@+id/save"
+        android:icon="@drawable/save_hdpi"
+        android:title="Save"
         app:showAsAction="never"
         />
 </menu>
