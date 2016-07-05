@@ -1,5 +1,6 @@
 package com.carolyncheung.calc.fragments;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -81,14 +82,39 @@ public class ActionBarFragment extends Fragment {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+            case R.id.switcheroo:
+                Intent from_activity = getActivity().getIntent();
+                String this_activity = from_activity.getStringExtra(Constant.FROM_ACTIVITY);
+                if (this_activity.equals(Constant.ACTIVITY_WEIGHT_ADD) || this_activity.equals(Constant.ACTIVITY_MODPLATES)) {
+                    Log.v("ActionBarFragment", "barCalc");
+                    Intent intent = new Intent(getActivity(), WeightCalculateActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                    intent.putExtra(Constant.FROM_ACTIVITY, Constant.ACTIVITY_WEIGHT_CALCULATE);
+                    startActivity(intent);
+                    return true;
+                } else if (this_activity.equals(Constant.ACTIVITY_WEIGHT_CALCULATE)) {
+                    Log.v("ActionBarFragment", "barAdd");
+                    Intent intent = new Intent(getActivity(), WeightAddActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                    intent.putExtra(Constant.FROM_ACTIVITY, Constant.ACTIVITY_WEIGHT_ADD);
+                    startActivity(intent);
+                    return true;
+                }
+                return true;
             case R.id.barAdd:
                 Log.v("ActionBarFragment", "barAdd");
                 Intent intent = new Intent(getActivity(), WeightAddActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivity(intent);
                 return true;
             case R.id.barCalc:
                 Log.v("ActionBarFragment", "barCalc");
                 intent = new Intent(getActivity(), WeightCalculateActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivity(intent);
                 return true;
             case R.id.settings:
@@ -99,6 +125,7 @@ public class ActionBarFragment extends Fragment {
             case R.id.modPlates:
                 Log.v("ActionBarFragment", "settings");
                 intent = new Intent(getActivity(), ModPlatesActivity.class);
+                intent.putExtra(Constant.FROM_ACTIVITY, Constant.ACTIVITY_WEIGHT_CALCULATE);
                 startActivity(intent);
                 return true;
             case R.id.createPlate:

@@ -67,7 +67,8 @@
                     android:selectAllOnFocus="true"
                     android:numeric="decimal"
                     android:imeOptions="actionDone"
-                    android:textColorHighlight="#00ffffff" />
+                    android:textColorHighlight="#00ffffff"
+                    android:backgroundTint="@color/white" />
 
                 <LinearLayout
                     android:orientation="horizontal"

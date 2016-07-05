@@ -36,6 +36,8 @@ public class Constant {
     public static final String ACTIVITY_ADDPLATE = "activity_addplate";
     public static final String ACTIVITY_MODPLATES = "activity_modplates";
     public static final String ACTIVITY_CALCULATE = "activity_calculate";
+    public static final String ACTIVITY_WEIGHT_CALCULATE = "activity_weight_calculate";
+    public static final String ACTIVITY_WEIGHT_ADD = "activity_weight_add";
 
     // static values for res files
     // color R values

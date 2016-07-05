@@ -2,22 +2,28 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
+        android:id="@+id/switcheroo"
+        android:icon="@drawable/ic_loop_white_48dp"
+        android:title="Switch"
+        app:showAsAction="ifRoom"
+        />
+    <item
         android:id="@+id/barAdd"
         android:icon="@drawable/baradd"
         android:title="Add Weights"
-        app:showAsAction="ifRoom"
+        app:showAsAction="never"
         />
     <item
         android:id="@+id/barCalc"
         android:icon="@drawable/barcalc"
         android:title="Calculate Weight"
-        app:showAsAction="ifRoom"
+        app:showAsAction="never"
         />
     <item
         android:id="@+id/settings"
         android:icon="@drawable/settings"
         android:title="Settings"
-        app:showAsAction="ifRoom"
+        app:showAsAction="never"
         />
     <item
         android:id="@+id/modPlates"
@@ -31,10 +37,5 @@
         android:title="Create Plate"
         app:showAsAction="never"
         />
-    <item
-        android:id="@+id/save"
-        android:icon="@drawable/save_hdpi"
-        android:title="Save"
-        app:showAsAction="never"
-        />
+
 </menu>

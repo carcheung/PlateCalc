@@ -11,7 +11,6 @@ import java.util.ArrayList;
  * Helper class to handle various calculations
  */
 public class CalculationsHelper {
-
 // Rounds weights up or down to the nearest multiple of 5, retains the decimals
     static public double roundWeights(double weight) {
         double d_weight = weight;
@@ -35,5 +34,10 @@ public class CalculationsHelper {
         return d_weight;
     }
 
+    static public double convertWeight(double weight) {
+        // TODO: check shared preferences to see the units first
 
+        weight /= 2.2046226218;
+        return weight;
+    }
 }

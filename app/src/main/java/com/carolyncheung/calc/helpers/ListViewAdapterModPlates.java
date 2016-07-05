@@ -127,23 +127,6 @@ public class ListViewAdapterModPlates extends BaseAdapter {
                 bundle.putString(ID_COLUMN, Integer.toString(plate_set.get(position).getId()));
                 mod_plate.setArguments(bundle);
                 mod_plate.show(fragmentManager, "HELLO");
-                /*
-
-                new AlertDialog.Builder(c)
-                        .setTitle("Delete entry")
-                        .setMessage("Are you sure you want to delete this entry?")
-                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                                // continue with delete
-                            }
-                        })
-                        .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                                // do nothing
-                            }
-                        })
-                        .setIcon(android.R.drawable.ic_dialog_alert)
-                        .show(); */
             }
         });
 

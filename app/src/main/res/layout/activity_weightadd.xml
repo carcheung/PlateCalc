@@ -174,24 +174,50 @@
                     android:layout_toStartOf="@+id/units"
                     android:textColor="@color/white"
                     android:textSize="30sp"
-                    android:textAlignment="center"
+                    android:textAlignment="textEnd"
                     android:text="45"
-                    android:layout_centerInParent="true" />
+                    android:layout_centerInParent="true"
+                    android:textIsSelectable="false" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="lbs"
+                    android:text="LBS"
                     android:id="@+id/units"
                     android:layout_alignParentEnd="false"
                     android:layout_alignParentRight="true"
                     android:layout_alignParentLeft="false"
-                    android:layout_alignParentTop="false"
-                    android:layout_alignBaseline="@+id/weight"
                     android:textColor="@color/white"
-                    android:layout_centerVertical="true"
                     android:layout_marginRight="30dp"
-                    />
+                    android:textSize="30sp"
+                    android:layout_above="@+id/convert_weight"
+                    android:layout_alignTop="@+id/weight"
+                    android:layout_alignParentBottom="false"
+                    android:layout_alignBaseline="@+id/weight" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="22.5"
+                    android:id="@+id/convert_weight"
+                    style="@style/AppTheme"
+                    android:textAlignment="textEnd"
+                    android:singleLine="true"
+                    android:textSize="15sp"
+                    android:layout_below="@+id/weight"
+                    android:layout_toStartOf="@+id/converted_unit" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="KG"
+                    android:id="@+id/converted_unit"
+                    style="@style/AppTheme"
+                    android:textSize="15sp"
+                    android:layout_below="@+id/units"
+                    android:layout_alignEnd="@+id/units" />
 
             </RelativeLayout>
 

@@ -1,11 +1,9 @@
 package com.carolyncheung.calc.activities;
 
-import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -17,7 +15,7 @@ import com.carolyncheung.calc.data.DBHandler;
 import com.carolyncheung.calc.data.Constant;
 import com.carolyncheung.calc.data.PlateData;
 import com.carolyncheung.calc.fragments.DisplayPlateSetAddFragment;
-import com.carolyncheung.calc.helpers.ListViewAdapterAdd;
+import com.carolyncheung.calc.helpers.CalculationsHelper;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -46,8 +44,9 @@ public class WeightAddActivity extends AppCompatActivity {
 
         // add the fragment to R.id.show_plate_set
         show_plate_set.setId(R.id.show_plate_set);
-        final DisplayPlateSetAddFragment myFrag = new DisplayPlateSetAddFragment();
-        fragmentTransaction.add(show_plate_set.getId(), myFrag);
+        DisplayPlateSetAddFragment displayPlateSetAddFragment =
+                new DisplayPlateSetAddFragment();
+        fragmentTransaction.add(show_plate_set.getId(), displayPlateSetAddFragment);
         fragmentTransaction.commit();
 
         DBHandler db = new DBHandler(this);
@@ -56,7 +55,7 @@ public class WeightAddActivity extends AppCompatActivity {
         frame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                myFrag.sendPlateData();
+
                 return;
             }
         });
@@ -68,6 +67,7 @@ public class WeightAddActivity extends AppCompatActivity {
         clearPlates();
 
         double weight = 0;
+        double convert_weight = 0;
         int size = 1;
         String color;
         // TODO: CHANGE BAR WEIGHT LATER WHEN IMPLEMENTING BARBELLS
@@ -78,11 +78,11 @@ public class WeightAddActivity extends AppCompatActivity {
         int plateSize;
         int plateColor;
 
-        int imgStart = R.id.barMid;
         int imgBarEnd = R.id.barEnd;
         ImageView barEnd = (ImageView)findViewById(imgBarEnd);
         ImageView pImg;
         TextView total_weight = (TextView)findViewById(R.id.weight);
+        TextView converted_weight = (TextView)findViewById(R.id.convert_weight);
 
         // MARGIN VALUES CONVERTED TO DP
         int id;
@@ -231,9 +231,10 @@ public class WeightAddActivity extends AppCompatActivity {
 
         barEnd.setLayoutParams(barEndLp);
         DecimalFormat format = new DecimalFormat("0.#");
+        convert_weight = CalculationsHelper.convertWeight(weight);
 
         total_weight.setText(format.format(weight));
-
+        converted_weight.setText(format.format(convert_weight));
     }
 
     public void clearPlates() {

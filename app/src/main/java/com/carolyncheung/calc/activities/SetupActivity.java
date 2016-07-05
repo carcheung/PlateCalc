@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import com.carolyncheung.calc.R;
+import com.carolyncheung.calc.data.Constant;
 import com.carolyncheung.calc.data.DBHandler;
 import com.carolyncheung.calc.helpers.SharedPreferencesHelper;
 
@@ -26,6 +27,7 @@ public class SetupActivity extends AppCompatActivity {
         }
 
         Intent intent = new Intent(SetupActivity.this, WeightCalculateActivity.class);
+        intent.putExtra(Constant.FROM_ACTIVITY, Constant.ACTIVITY_WEIGHT_CALCULATE);
         startActivity(intent);
     }
 

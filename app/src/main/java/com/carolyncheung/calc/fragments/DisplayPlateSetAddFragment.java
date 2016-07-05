@@ -93,12 +93,6 @@ public class DisplayPlateSetAddFragment extends Fragment {
     }
 
     public ArrayList<PlateData> sendPlateData(){
-        for (int i = 0; i < plate_set.size(); i++) {
-
-            Object o = elv.getAdapter().getItem(i);
-            Log.d("elv", o.toString());
-        }
-
 
         return plate_set;
     }

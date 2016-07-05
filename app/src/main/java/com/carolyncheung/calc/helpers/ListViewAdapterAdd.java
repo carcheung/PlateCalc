@@ -35,6 +35,7 @@ public class ListViewAdapterAdd extends BaseAdapter{
     DisplayPlateSetAddFragment fragment;
     private ArrayList<PlateData> plate_set;
     String id = "999";
+    private int count = 0;
 
     private DataTransferInterface data;
 
@@ -106,27 +107,33 @@ public class ListViewAdapterAdd extends BaseAdapter{
         plus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int amt = plate_set.get(position).getAmount() + 1;
-                plate_set.get(position).setAmount(amt);
-                list.get(position).put(AMOUNT_COLUMN, Integer.toString(amt));
-                notifyDataSetChanged();
+                if (count < 10) {
+                    count++;
+                    int amt = plate_set.get(position).getAmount() + 1;
+                    plate_set.get(position).setAmount(amt);
+                    list.get(position).put(AMOUNT_COLUMN, Integer.toString(amt));
+                    notifyDataSetChanged();
 
-                WeightAddActivity w = (WeightAddActivity) fragment.getActivity();
-                w.calculateAddedWeight(plate_set);
+                    WeightAddActivity w = (WeightAddActivity) fragment.getActivity();
+                    w.calculateAddedWeight(plate_set);
+                }
             }
         });
 
         final ImageView minus = holder.minus;
         minus.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                int amt = plate_set.get(position).getAmount() - 1;
-                plate_set.get(position).setAmount(amt);
-                //holder.plateAmount.setText(Integer.toString(plate_set.get(position).getAmount()));
-                list.get(position).put(AMOUNT_COLUMN, Integer.toString(amt));
-                notifyDataSetChanged();
+                if (plate_set.get(position).getAmount() > 0 && count > 0) {
+                    count--;
+                    int amt = plate_set.get(position).getAmount() - 1;
+                    plate_set.get(position).setAmount(amt);
+                    //holder.plateAmount.setText(Integer.toString(plate_set.get(position).getAmount()));
+                    list.get(position).put(AMOUNT_COLUMN, Integer.toString(amt));
+                    notifyDataSetChanged();
 
-                WeightAddActivity w = (WeightAddActivity) fragment.getActivity();
-                w.calculateAddedWeight(plate_set);
+                    WeightAddActivity w = (WeightAddActivity) fragment.getActivity();
+                    w.calculateAddedWeight(plate_set);
+                }
             }
         });
 
